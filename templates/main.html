@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MITRE ATT&CK Text Reports Classifier</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <style>
+    body {
+      background: linear-gradient(to right, #283037, #1396a2);
+      color: aliceblue;
+    }
+    h1, p, div {
+      color: aliceblue;
+    }
+    h2 {
+      color: lightskyblue;
+    }
+    b {
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">MITRE ATT&CK Text Reports Classifier</h1>
+    
+    <h2 class="mt-4">About</h2>
+    <p>This work was requested from the cybersecurity company <a target="_blank" href="https://samapartners.com/"><b>SamaPartners</b></a> during a summer internship.</p>
+    <img src="{{ url_for('static', filename='Sama-Partners.png') }}" alt="SamaPartners logo" class="logo"><br>
+    <p>The application is designed to predict MITRE ATT&CK IDs based on text descriptions from company reports. It leverages a powerful machine learning model trained to classify (multi-label) up to 191 different MITRE ATT&CK techniques.</p>
+    
+    <h2 class="mt-4">Model</h2>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="text" class="form-label">Enter text to classify:</label>
+        <textarea class="form-control" id="text" name="text" rows="4"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Classify</button>
+    </form>
+
+    {% if prediction %}
+      <div class="mt-4">
+        <h4>Predicted Classes:</h4>
+        <ul>
+          {% for pred in prediction %}
+            <li>{{ pred }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
